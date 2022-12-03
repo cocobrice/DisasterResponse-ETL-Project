@@ -1,6 +1,6 @@
 # DisasterResponse-ETL-Project
 
-As part of a project for Udacity Data Science nanodegree I have built a web application to categorise messages based on their disaster relief context. The data was provided by 
+As part of a project for Udacity Data Science nanodegree I have built a web application to categorise messages based on their disaster relief context. The application has 3 main modules to run. The first module process_data.py merges and cleans our datasets before outputting a dataset for producing a model and displaying results to our web app. The second module train_classifier.py take the database from our first module and creates a ridge classifier pipeline for our categories, it trains the model, uses GridsearchCV to tune and then outputs our model. The final module run.py takes the database from our first module and model from our second module and produces a web app where it displays the distribution of each catgory and provides categorisation for a text input where the predicted categories are highlighted green.
 
 
 Contents:
@@ -45,4 +45,4 @@ Contents:
 
 3. Run your web app: `python run.py`
 
-4. Click the `PREVIEW` button to open the homepage
+4. View the web app
