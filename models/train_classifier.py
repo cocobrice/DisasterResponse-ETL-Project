@@ -20,6 +20,13 @@ import nltk
 nltk.download(['punkt', 'wordnet'])
 
 def load_data(database_filepath):
+    '''
+    INPUT:
+    database_filepath - database location to read for modelling
+    
+    Returns numpy arrays of the target messages, our categoures and a list of our categories
+    '''
+    
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table(database_filepath, con=engine)
     X = df.message.values
@@ -31,6 +38,13 @@ def load_data(database_filepath):
     
     
 def tokenize(text):
+    '''
+    INPUT:
+    text - string to be tokenized. i.e. lower capitalised, stop characters removed tokenize and lemmatize functions applied 
+    
+    Returns tokenized string
+    '''
+        
     ## normalise text
     text = text.lower()
     text = re.sub(r"[^a-zA-Z0-9]", " ", text) 
@@ -44,6 +58,12 @@ def tokenize(text):
     return lemmed
 
 def build_model():
+    '''
+    Constructs a model pipeline using our tokenzer function, the TFIDF transformer and ridge a classifier model. It then applies a gridsearch over the 
+    clf_estimator_alpha parameter
+    
+    returns the model pipeline
+    '''
     
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -60,9 +80,19 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''
+    INPUT:
+    model - model pipeline to be tested
+    X_test - Messages to be tested numpy array
+    Y_test - True results for test messages numpy array
+    category_names - list of categories to be reported upon
     
+    Tests our model on the test messages and provides a classification report for each category based on the prediction
+    '''
+    # predict categories for our test set with our model pipeline
     y_pred = model.predict(X_test)
     
+    #produce a classification report for each category
     target_names = ['0','1']
     for x in range(0,len(category_names)):
         print(str(category_names[x]))
@@ -70,7 +100,13 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-
+    '''
+    INPUT:
+    model - trained model to be output
+    model_filepath - location model should be stored as a pickle
+    
+    Stores model as pickle to the location
+    '''
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
