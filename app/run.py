@@ -25,11 +25,11 @@ def tokenize(text):
 
     return clean_tokens
 
-# load data
+# load data produced by data/process_data.py
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('data/DisasterResponse.db', engine)
 
-# load model
+# load model produced by model/train_classifier.py
 model = joblib.load("../models/classifier.pk1")
 
 
@@ -43,6 +43,7 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    # create a dataset of just categories and messages to perform a distribution count on each category
     catplot = df.drop(['genre'], axis=1)
     cat_cols = catplot.drop(['message'], axis=1).columns
     
@@ -69,10 +70,12 @@ def index():
         }
     ]
     
+    # loop through each category and add to graph a distruntion bar chart for that category
     for i in cat_cols:
-        
+        # count the flags for that category
         cat_dat = catplot[['message', str(i)]].groupby(str(i)).count()['message']
         cats = list(cat_dat.index)
+        
         cat_graph = [
             {
                 'data': [
@@ -94,6 +97,7 @@ def index():
             }
         ]
         
+        # add the category graph to the list of graphs to plot in our web app
         graphs = graphs + cat_graph
     
     # encode plotly graphs in JSON
