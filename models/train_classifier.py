@@ -51,7 +51,12 @@ def build_model():
         ('clf', MultiOutputClassifier(RidgeClassifier()))
     ])
     
-    return pipeline
+    parameters = {
+        'clf__estimator__alpha': [0.1, 0.6, 1]}
+
+    cv = GridSearchCV(pipeline, param_grid=parameters) 
+    
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
