@@ -3,7 +3,7 @@
 As part of a project for Udacity Data Science nanodegree I have built a web application to categorise messages based on their disaster relief context. The application has 3 main modules to run. The first module process_data.py merges and cleans our datasets before outputting a dataset to a database for training a model and displaying results to our web app. The second module train_classifier.py take the database from our first module and creates a ridge classifier pipeline for our categories, it trains the model, uses GridsearchCV to tune and then outputs our model. The final module run.py takes the database from our first module and model from our second module and produces a web app where it displays the distribution of each catgory and provides categorisation for a text input where the predicted categories are highlighted green.
 
 
-Contents:
+### Contents:
 1. [Libraries used](#libraries-used)
 2. [Data](#data)
 3. [Modules](#modules)
@@ -31,7 +31,9 @@ Contents:
 ### **Modules**
 |   Module      | Description |
 |---|---|
-| run.py | This notebook is used for cleaning text, finding commonly used words and phrases, using TextBlob to establish sentiment, cleaning feature data and modelling results |
+| data/process_data.py  | This module takes our csv data, merges them, and draws out the categorisation for each message before outputting to a sql database |
+| model/train_classifier.py | This module takes the sql database and trains a ridge classifier model for each category with a gridsearchCV finetuning before outputting a pickle model |
+| app/run.py | This module takes the database and produces bar chart distribution for each catgorisation and an input box where text input is categorised by our model. The results will show accepted model categorisations highlighted green |
 
 ### **Instructions**:
 1. Run the following commands in the project's root directory to set up your database and model.
