@@ -1,5 +1,39 @@
 # DisasterResponse-ETL-Project
-### Instructions:
+
+As part of a project for Udacity Data Science nanodegree I have built a web application to categorise messages based on their disaster relief context. The data was provided by 
+
+
+Contents:
+1. [Libraries used](#libraries-used)
+2. [Data](#data)
+3. [Modules](#modules)
+4. [Instructions](#instructions)
+
+### **Libraries used**
+* numpy
+* pandas
+* scikit-learn
+* json
+* plotly
+* sqlalchemy
+* nltk
+* flask
+* pickle
+* re
+* sys
+
+### **Data**
+|      Data       |             Description                      |                    Source                      |
+|-----------------|----------------------------------------------|------------------------------------------------|
+|   messages.csv  |   disaster response messages   | data/messages.csv |
+|   categories.csv   |   categorisation of disaster response messages                | data/categories.csv |
+
+### **Modules**
+|   Module      | Description |
+|---|---|
+| run.py | This notebook is used for cleaning text, finding commonly used words and phrases, using TextBlob to establish sentiment, cleaning feature data and modelling results |
+
+### **Instructions**:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
