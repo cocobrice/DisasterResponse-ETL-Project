@@ -50,6 +50,9 @@ def clean_data(df):
     df = df[['message', 'genre']]
     df = pd.concat([df.reset_index(drop=True), categories.reset_index(drop=True)], axis=1)
     
+    # remove related = 2 rows from dataset
+    df = df[df.related < 2]
+    
     # drop duplicates
     df = df.drop_duplicates()
     
